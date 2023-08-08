@@ -3,7 +3,7 @@ import sys
 import layoutparser as lp # For visualization 
 
 from vila.pdftools.pdf_extractor import PDFExtractor
-from vila.predictors import HierarchicalPDFPredictor
+from vila.predictors import HierarchicalPDFPredictor, LayoutIndicatorPDFPredictor
 # Choose from SimplePDFPredictor,
 # LayoutIndicatorPDFPredictor, 
 # and HierarchicalPDFPredictor
@@ -15,7 +15,7 @@ pdf_extractor = PDFExtractor("pdfplumber")
 page_tokens, page_images = pdf_extractor.load_tokens_and_image(PDF_PATH)
 
 vision_model = lp.EfficientDetLayoutModel("lp://PubLayNet") 
-pdf_predictor = HierarchicalPDFPredictor.from_pretrained("allenai/hvila-block-layoutlm-finetuned-docbank")
+pdf_predictor = LayoutIndicatorPDFPredictor.from_pretrained("allenai/ivila-block-layoutlm-finetuned-docbank")
 
 for idx, page_token in enumerate(page_tokens):
     if idx >= MAX_PAGE:
